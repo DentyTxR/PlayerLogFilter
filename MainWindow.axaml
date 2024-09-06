@@ -1,0 +1,120 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:controls="clr-namespace:ConfigFactory.Avalonia;assembly=ConfigFactory.Avalonia"
+        xmlns:vm="using:Avalonia.MusicStore.ViewModels"
+        xmlns:local="using:PlayerLogFilter"
+        mc:Ignorable="d"
+        d:DesignWidth="800"
+        d:DesignHeight="450"
+        x:Class="PlayerLogFilter.MainWindow"
+        Title="Player Log Filter"
+        x:DataType="local:MainWindow">
+
+	<Grid Margin="10">
+		<!-- Row definitions for the grid -->
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"/>
+			<!-- Title bar and settings button -->
+			<RowDefinition Height="Auto"/>
+			<!-- File upload controls -->
+			<RowDefinition Height="*"/>
+			<!-- Data display -->
+			<RowDefinition Height="Auto"/>
+			<!-- Bottom bar -->
+			<RowDefinition Height="Auto"/>
+			<!-- Footer -->
+		</Grid.RowDefinitions>
+
+		<!-- Title Bar with Settings Button -->
+		<Grid Grid.Row="0" Margin="0,10,0,10">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="*" />
+				<!-- Title alignment -->
+				<ColumnDefinition Width="Auto" />
+				<!-- Settings button -->
+			</Grid.ColumnDefinitions>
+
+			<!-- Title Bar -->
+			<Border Background="#2D2D30" Padding="10" CornerRadius="10" Grid.Column="0">
+				<TextBlock Text="Player Log Filter" FontSize="24" FontWeight="Bold" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+			</Border>
+
+			<!-- Settings Button -->
+			<Button Content="Settings" Click="OnOpenSettings" Grid.Column="1" Margin="10,0,0,0" VerticalAlignment="Center"/>
+		</Grid>
+
+		<!-- File Upload Control -->
+		<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="1" Margin="0,10,0,10">
+			<Button Content="Upload Log File" Click="OnUploadFileClick" Margin="0,0,10,0"/>
+			<TextBlock Name="FilePathTextBlock" VerticalAlignment="Center" Text="No file selected"/>
+		</StackPanel>
+
+		<TabControl Grid.Row="2">
+			<TabItem Header="{Binding ImportantInfoTabHeader}">
+				<TextBox Name="ImportantInfoTextBox"
+                         AcceptsReturn="True"
+                         IsReadOnly="True"
+                         Background="#1E1E1E"
+                         Foreground="White"
+                         FontFamily="Consolas"
+                         FontSize="14"
+                         TextWrapping="Wrap"
+                         VerticalAlignment="Stretch"
+                         HorizontalAlignment="Stretch"/>
+			</TabItem>
+			<TabItem Header="Graphic Info">
+				<TextBox Name="GraphicInfoTextBox"
+                         AcceptsReturn="True"
+                         IsReadOnly="True"
+                         Background="#1E1E1E"
+                         Foreground="White"
+                         FontFamily="Consolas"
+                         FontSize="14"
+                         TextWrapping="Wrap"
+                         VerticalAlignment="Stretch"
+                         HorizontalAlignment="Stretch"/>
+			</TabItem>
+			<TabItem Header="Game Info">
+				<TextBox Name="GameInfoTextBox"
+                         AcceptsReturn="True"
+                         IsReadOnly="True"
+                         Background="#1E1E1E"
+                         Foreground="White"
+                         FontFamily="Consolas"
+                         FontSize="14"
+                         TextWrapping="Wrap"
+                         VerticalAlignment="Stretch"
+                         HorizontalAlignment="Stretch"/>
+			</TabItem>
+			<TabItem Header="System Info">
+				<TextBox Name="SystemInfoTextBox"
+                         AcceptsReturn="True"
+                         IsReadOnly="True"
+                         Background="#1E1E1E"
+                         Foreground="White"
+                         FontFamily="Consolas"
+                         FontSize="14"
+                         TextWrapping="Wrap"
+                         VerticalAlignment="Stretch"
+                         HorizontalAlignment="Stretch"/>
+			</TabItem>
+		</TabControl>
+
+		<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="3" Margin="0,10,0,0">
+			<Button Content="Process Log" Click="OnProcessLogClick" Margin="0,0,10,0"/>
+			<Button Content="Clear" Click="OnClearClick"/>
+		</StackPanel>
+
+		<Border Grid.Row="4" Margin="0,10,0,0" Padding="6">
+			<StackPanel>
+				<Separator Margin="0,0,0,10"/>
+				<TextBlock Foreground="Gray" HorizontalAlignment="Center">
+					<Run Text="Made with love by Denty |"/>
+					<Run Text="TESTING BUILD" Foreground="red"/>
+				</TextBlock>
+			</StackPanel>
+		</Border>
+	</Grid>
+</Window>
