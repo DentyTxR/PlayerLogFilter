@@ -6,6 +6,7 @@
     <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
+    <Platforms>AnyCPU;x64</Platforms>
   </PropertyGroup>
 
   <ItemGroup>
@@ -18,5 +19,6 @@
     <PackageReference Include="ConfigFactory" Version="0.4.2" />
     <PackageReference Include="ConfigFactory.Avalonia" Version="0.4.2" />
     <PackageReference Include="ConfigFactory.Core" Version="0.4.2" />
+    <PackageReference Include="HarfBuzzSharp" Version="7.3.0.2" />
   </ItemGroup>
 </Project>
