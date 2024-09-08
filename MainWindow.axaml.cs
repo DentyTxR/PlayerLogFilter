@@ -69,16 +69,18 @@ namespace PlayerLogFilter
                 { "VRAM:", line => graphicInfoDict["GPU VRAM"] = ExtractValue(line) },
                 { "GPU Driver:", line => graphicInfoDict["GPU Driver"] = ExtractValue(line) },
                 { "Info:", line => graphicInfoDict["Graphic API (In-Game)"] = ExtractValue(line) },
+                { "FPS Limit:", line => graphicInfoDict["FPS Limit"] = ExtractValue(line) },
                 { "Resolution:", line => graphicInfoDict["Screen Resolution (In-Game)"] = ExtractValue(line) },
 
             //Game
+                { "Started Steam Client", line => gameInfoDict["Steam Username/ID"] = line },
                 { "Game version:", line => gameInfoDict["Game Version"] = ExtractValue(line) },
                 { "Preauth version:", line => gameInfoDict["Preauth Version"] = ExtractValue(line) },
                 { "Build type:", line => gameInfoDict["Build Type"] = ExtractValue(line) },
-                { "Unity:", line => gameInfoDict["Unity Version"] = ExtractValue(line) },
                 { "Unity version:", line => gameInfoDict["Unity Version"] = ExtractValue(line) },
-
-            //System
+                //{ "Launch arguments", line => gameInfoDict["Launch arguments"] = line }, need to fix
+                
+                //System
                 { "OS:", line => systemInfoDict["OS"] = ExtractValue(line) },
                 { "CPU:", line => systemInfoDict["CPU"] = ExtractValue(line) },
                 { "Threads:", line => systemInfoDict["CPU Threads"] = ExtractValue(line) },
@@ -184,26 +186,28 @@ namespace PlayerLogFilter
             }
         }
 
+        private string ExtractLine(string line)
+        {
+            return line.Trim(); // Simply return the trimmed line
+        }
+
         private string ExtractValue(string line)
         {
             var parts = line.Split(new[] { ':' }, 2);
-
             if (parts.Length > 1)
             {
                 var value = parts[1].Trim();
-
-                value = value.Split('(')[0].Trim();
-
-                return value;
+                return value.Split('(')[0].Trim();
             }
-            return "Value not found";
+            return line.Trim(); // Return the line itself if no colon is found
         }
+
 
         private string FormatDictionary(Dictionary<string, string> dictionary)
         {
             var sortedDictionary = dictionary.OrderBy(kv => kv.Key);
             return sortedDictionary.Count() > 0
-                ? string.Join(Environment.NewLine, sortedDictionary.Select(kv => $"{kv.Key}: {kv.Value}")) : "No relevant data found.";
+                ? string.Join(Environment.NewLine, sortedDictionary.Select(kv => $"{kv.Key}: {kv.Value}\n")) : "No data found.";
         }
     }
 }
